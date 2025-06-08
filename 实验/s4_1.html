@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改div背景色</title>
+    <style>
+        #colorBox {
+            width: 200px;
+            height: 100px;
+            border: 1px solid #000;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>请选择颜色</h2>
+    <select id="colorSelect">
+        <option value="">--请选择--</option>
+        <option value="red">红色</option>
+        <option value="green">绿色</option>
+        <option value="blue">蓝色</option>
+    </select>
+    
+    <button id="changeColorBtn">修改div背景色</button>
+    
+    <div id="colorBox"></div>
+
+    <script>
+        document.getElementById('changeColorBtn').addEventListener('click', function() {
+            const colorSelect = document.getElementById('colorSelect');
+            const selectedColor = colorSelect.value;
+            const colorBox = document.getElementById('colorBox');
+            
+            if (selectedColor) {
+                colorBox.style.backgroundColor = selectedColor;
+            } else {
+                alert('请先选择一个颜色！');
+            }
+        });
+    </script>
+</body>
+</html>

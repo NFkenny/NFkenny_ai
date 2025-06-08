@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <ul id="friends"></ul>
+  <script>
+    // JSON 数组
+    // 数据
+    const friends = [
+      { name: "John", age: 30, city: "New York" },
+      { name: "Jane", age: 25, city: "Los Angeles" },
+      { name: "Bob", age: 35, city: "Chicago" },
+    ]
+
+    
+    // DOM 编程
+    const ul = document.querySelector('friends')
+    // for of 循环
+    // for(let friend of friends){
+    //   ul.innerHTML += `
+    //     <li>
+    //       <p>Name: ${friend.name}</p>
+    //       <p>Age: ${friend.age}</p>
+    //       <p>City: ${friend.city}</p>
+    //     </li>
+    //     `
+    // }
+    // es6 forEach 升级版
+    // 迭代
+    ul.innerHTML = friends.map(friend => {
+      return `
+        <li>
+          <p>Name: ${friend.name}</p>
+          <p>Age: ${friend.age}</p>
+          <p>City: ${friend.city}</p>
+        </li>
+        `
+    }).join('')
+  </script>
+</body>
+</html>

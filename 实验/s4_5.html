@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>省份城市联动</title>
+<meta charset="UTF-8">
+<style>
+select {
+    padding: 8px;
+    font-size: 16px;
+    margin-right: 10px;
+}
+</style>
+<script type="text/javascript">
+// 定义省份和城市的数据
+var cityData = new Object();
+cityData["江西省"] = new Array("南昌市", "抚州市", "景德镇市", "九江市");
+cityData["广东省"] = new Array("广州市", "韶关市", "佛山市", "江门市");
+
+// 联动函数
+function set_city(provinceSelect, citySelectId) {
+    // 获取选中的省份
+    var selectedProvince = provinceSelect.value;
+    var citySelect = document.getElementById(citySelectId);
+    
+    // 清空城市下拉框，只保留默认选项
+    citySelect.innerHTML = '<option value="0">选择城市</option>';
+    
+    // 如果选择了有效的省份
+    if (selectedProvince != "0" && cityData[selectedProvince]) {
+        // 获取该省份对应的城市数组
+        var cities = cityData[selectedProvince];
+        
+        // 添加城市选项
+        for (var i = 0; i < cities.length; i++) {
+            var option = document.createElement("option");
+            option.value = cities[i];
+            option.text = cities[i];
+            citySelect.appendChild(option);
+        }
+    }
+}
+</script>
+
+</head>
+<body>
+<div>
+    <form name="form1" action="" method="get">
+        <select name="province" onChange="set_city(this, 'citys')">
+            <option value="0">选择省</option>
+            <option value="江西省">江西省</option>
+            <option value="广东省">广东省</option>
+        </select>
+        <select name="city" id="citys">
+            <option value="0">选择城市</option>
+        </select>
+    </form>
+</div>
+</body>
+</html>

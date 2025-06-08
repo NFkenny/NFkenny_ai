@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>两位数加法练习</title>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        .question {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        input {
+            padding: 8px;
+            font-size: 18px;
+            width: 100px;
+            margin: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="question" id="question"></div>
+        <input type="number" id="answer" placeholder="输入答案">
+        <div>
+            <button onclick="checkAnswer()">判断</button>
+            <button onclick="newQuestion()">下一题</button>
+        </div>
+    </div>
+
+    <script>
+        let num1, num2;
+
+        function generateQuestion() {
+            num1 = Math.floor(Math.random() * 100);
+            num2 = Math.floor(Math.random() * 100);
+            document.getElementById('question').textContent = 
+                `${num1} + ${num2} = ?`;
+        }
+
+        function checkAnswer() {
+            const userAnswer = parseInt(document.getElementById('answer').value);
+            const correctAnswer = num1 + num2;
+            
+            if (userAnswer === correctAnswer) {
+                alert('回答正确！👍');
+            } else {
+                alert(`回答错误，正确答案是 ${correctAnswer}`);
+            }
+        }
+
+        function newQuestion() {
+            document.getElementById('answer').value = '';
+            generateQuestion();
+        }
+
+        // 初始化题目
+        generateQuestion();
+    </script>
+</body>
+</html>

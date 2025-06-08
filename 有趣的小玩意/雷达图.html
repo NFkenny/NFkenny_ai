@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>六边形雷达图</title>
+    <style>
+        canvas {
+            border: 1px solid #ddd;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="radar" width="400" height="400"></canvas>
+
+    <!-- 在canvas标签后添加控制面板 -->
+    <div class="controls">
+        <form id="dataForm">
+            <div class="form-row" v-for="(_, index) in 6">
+                <!-- <label>{{ config.labels[index] }}:</label> -->
+                <input type="number" min="0" max="1" step="0.1" 
+                       :value="config.data[index].toFixed(1)"
+                       @change="updateData(index, $event.target.value)">
+            </div>
+            <button type="button" onclick="updateChart()">更新图表</button>
+        </form>
+    </div>
+
+    <style>
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+        .controls {
+            padding: 15px;
+            border: 1px solid #ddd;
+            background: #f5f5f5;
+        }
+        .form-row {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        input[type="number"] {
+            width: 60px;
+            padding: 4px;
+        }
+        button {
+            padding: 8px 16px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        const config = {
+            layers: 3,        // 六边形层数
+            radius: 100,      // 最大半径
+            center: 200,      // 中心点坐标
+            data: [0.8, 0.7, 0.9, 0.6, 0.8, 0.7], // 各维度数据（0-1范围）
+            labels: ['攻击', '防御', '速度', '智力', '魔力', '耐力']
+        };
+        // 在config对象后添加表单初始化
+      function initForm() {
+        config.labels.forEach((label, index) => {
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.min = 0;
+        input.max = 1;
+        input.step = 0.1;
+        input.value = config.data[index].toFixed(1);
+        input.dataset.index = index;
+        
+        const labelEl = document.createElement('label');
+        labelEl.textContent = label + ':';
+        
+        const wrapper = document.createElement('div');
+        wrapper.className = 'form-row';
+        wrapper.append(labelEl, input);
+        
+        document.getElementById('dataForm').prepend(wrapper);
+      });
+    }
+
+// 添加更新图表函数
+      function updateChart() {
+          document.querySelectorAll('#dataForm input').forEach(input => {
+          const index = parseInt(input.dataset.index);
+          config.data[index] = parseFloat(input.value);
+        });
+      drawRadar();
+    }
+        const canvas = document.getElementById('radar');
+        const ctx = canvas.getContext('2d');
+        let currentIndex = -1;  // 新增：当前悬停的维度索引
+
+        // 新增：鼠标移动事件监听
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+            
+            // 计算鼠标极坐标
+            const dx = mouseX - config.center;
+            const dy = mouseY - config.center;
+            const distance = Math.sqrt(dx*dx + dy*dy);
+            const angle = Math.atan2(dy, dx) + Math.PI/2;
+            
+            // 检测悬停区域
+            currentIndex = (Math.floor(angle / (Math.PI/3)) + 6) % 6;
+            
+            if(distance > config.radius + 20 || distance < 20) {
+                currentIndex = -1;
+            }
+            
+            drawRadar();  // 重绘
+        });
+
+        function drawRadar() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 绘制六边形网格
+            ctx.strokeStyle = 'rgba(0, 150, 255, 0.3)';
+            for(let i = 1; i <= config.layers; i++) {
+                drawHexagon(config.center, config.center, config.radius * i / config.layers);
+            }
+
+            // 绘制坐标轴线
+            ctx.strokeStyle = '#666';
+            drawAxes();
+
+            // 绘制数据区域
+            ctx.fillStyle = 'rgba(255, 0, 0, 0.3)';
+            ctx.strokeStyle = 'red';
+            drawDataArea();
+
+            // 绘制标签
+            drawLabels();
+            
+            // 新增：绘制悬停提示
+            if(currentIndex !== -1) {
+                ctx.fillStyle = 'rgba(0,0,0,0.8)';
+                ctx.beginPath();
+                ctx.arc(
+                    config.center + (config.radius + 40) * Math.cos((currentIndex * Math.PI/3) - Math.PI/2),
+                    config.center + (config.radius + 40) * Math.sin((currentIndex * Math.PI/3) - Math.PI/2),
+                    20, 0, Math.PI*2
+                );
+                ctx.fill();
+                
+                ctx.fillStyle = 'white';
+                ctx.font = '14px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(
+                    config.data[currentIndex].toFixed(1),
+                    config.center + (config.radius + 40) * Math.cos((currentIndex * Math.PI/3) - Math.PI/2),
+                    config.center + (config.radius + 40) * Math.sin((currentIndex * Math.PI/3) - Math.PI/2) + 5
+                );
+            }
+        }
+
+        function drawHexagon(cx, cy, radius) {
+            ctx.beginPath();
+            for(let i = 0; i < 6; i++) {
+                const angle = (i * Math.PI / 3) - Math.PI / 2;
+                const x = cx + radius * Math.cos(angle);
+                const y = cy + radius * Math.sin(angle);
+                ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.stroke();
+        }
+
+        function drawAxes() {
+            for(let i = 0; i < 6; i++) {
+                const angle = (i * Math.PI / 3) - Math.PI / 2;
+                ctx.beginPath();
+                ctx.moveTo(config.center, config.center);
+                ctx.lineTo(
+                    config.center + config.radius * Math.cos(angle),
+                    config.center + config.radius * Math.sin(angle)
+                );
+                ctx.stroke();
+            }
+        }
+
+        function drawDataArea() {
+            ctx.beginPath();
+            for(let i = 0; i < 6; i++) {
+                const angle = (i * Math.PI / 3) - Math.PI / 2;
+                const r = config.radius * config.data[i];
+                const x = config.center + r * Math.cos(angle);
+                const y = config.center + r * Math.sin(angle);
+                ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+        }
+
+        function drawLabels() {
+            ctx.fillStyle = '#333';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'center';
+            
+            for(let i = 0; i < 6; i++) {
+                const angle = (i * Math.PI / 3) - Math.PI / 2;
+                const x = config.center + (config.radius + 20) * Math.cos(angle);
+                const y = config.center + (config.radius + 20) * Math.sin(angle);
+                ctx.fillText(config.labels[i], x, y);
+            }
+        }
+
+        drawRadar();
+        // 在初始化时调用
+      initForm();
+    </script>
+</body>
+</html>
+
+
+
+

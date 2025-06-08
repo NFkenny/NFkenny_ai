@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    const AAA建材大王 = Object.freeze({
+    name: '余希侠',
+    sex: '男',
+    age: 20,
+    tall: 171,
+    city: '抚州',
+    isSingle: true,
+    sendFlower:function(girl){
+      console.log(`${AAA建材大王.name}给${girl.name}送了99朵玫瑰`)
+      girl.receiveFlower(AAA建材大王) // 调用了girl对象的receiveFlower
+    }
+  });
+const girl = {
+    xq: 40,
+    name: '爱吃香菜',
+    room: '405',
+    sex: '女',
+    age: 18,
+    tall: 165,
+    city: '抚州',
+    isSingle: true,
+    receiveFlower:function(sender){
+      console.log(`${girl.name}收到了${sender.name}的99朵玫瑰`)
+      if(girl.xq > 90){
+        console.log("万象走一步")
+      }
+    }
+  };
+  const girl1 = {
+    xq: 30,
+    name: 'xiaomei',
+    room: '405',
+    receiveFlower:function(sender){
+      // if(sender.name==='余希侠'){
+      //   console.log('我喜欢你');
+      // }
+      // girl.receiveFlower(sender);
+      setTimeout(()=>{
+        girl.xq = 99;
+        girl.receiveFlower(sender)
+      },3000)
+    }
+  }
+  AAA建材大王.sendFlower(girl1) // 调用了AAA建材大王对象的sendFlower
+  </script>
+</body>
+</html>

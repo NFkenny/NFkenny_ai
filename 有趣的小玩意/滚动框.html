@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>滚动框示例</title>
+    <style>
+      .scroll-box {
+        height: 200px; /* 固定容器高度 */
+        overflow-y: auto; /* 垂直溢出滚动 */
+        scroll-behavior: smooth; /* 平滑滚动 */
+        overflow-y: auto; /* 自动显示滚动条 */
+        scrollbar-width: thin; /* 细滚动条（Firefox） */
+        scrollbar-color: #999 #eee; /* 滚动条配色 */
+        border: 1px solid #ccc; /* 添加边框 */
+        padding: 10px; /* 添加内边距 */
+        border-radius: 5px; /* 圆角边框 */
+      }
+      
+    </style>
+  </head>
+
+  <body>
+    <!-- 创建滚动框 -->
+    <div id="scrollBox" class="scroll-box">
+        <p>初始内容...</p>
+    </div>
+
+    <script>
+        // 动态内容加载
+        const box = document.querySelector('.scroll-box');
+        for(let i=0; i<5; i++) {
+          const p = document.createElement('p');
+          p.textContent = `动态生成内容 ${i+1}`;
+          box.appendChild(p);
+        }
+        </script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>判断奇偶数</title>
+<meta charset="UTF-8">
+<style>
+  input{
+      font-size: 40px;
+  }
+  body{
+      font-size: 40px;
+  }
+  select
+  {
+      font-size: 40px;
+  }
+</style>
+<script type="text/javascript">
+  // ①判断偶数的函数
+  function fun(num) {
+    // 先确保输入的是有效数字
+    if (isNaN(num)) {
+      return false;
+    }
+    // 判断是否为偶数
+    return num % 2 === 0;
+  }
+
+  // ③页面载入后自动填充随机数
+  window.onload = function() {
+    // 生成0-10000之间的随机整数
+    const randomNum = Math.floor(Math.random() * 10001);
+    // 填充到文本域
+    document.getElementsByName("num")[0].value = randomNum;
+  };
+
+  // ②按钮点击事件处理函数
+  function checkParity() {
+    const inputElement = document.getElementsByName("num")[0];
+    const num = parseInt(inputElement.value);
+    
+    if (isNaN(num)) {
+      alert("请输入有效的数字！");
+      return;
+    }
+    
+    const isEven = fun(num);
+    alert(`数字 ${num} 是${isEven ? '偶数' : '奇数'}`);
+  }
+</script>
+</head>
+<body>
+ <div id="div1">
+     请输入数字<br>
+    <input type="text" name="num">
+    <input type="button" onclick="checkParity()" value="判断奇偶性" />
+</div>
+</body>
+</html>

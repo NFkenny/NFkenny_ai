@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>电商APP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#FF0000",
+              secondary: "#FF6B6B",
+            },
+            borderRadius: {
+              none: "0px",
+              sm: "2px",
+              DEFAULT: "4px",
+              md: "8px",
+              lg: "12px",
+              xl: "16px",
+              "2xl": "20px",
+              "3xl": "24px",
+              full: "9999px",
+              button: "4px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .masonry {
+        column-count: 2;
+        column-gap: 16px;
+      }
+      .masonry-item {
+        break-inside: avoid;
+        margin-bottom: 16px;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <nav class="fixed top-0 w-full bg-white z-50 px-4 py-2 shadow-sm">
+      <div class="flex items-center justify-between">
+        <div class="font-['Pacifico'] text-primary text-xl">logo</div>
+        <div class="flex-1 mx-4">
+          <div class="flex items-center bg-gray-100 rounded-full px-4 py-2">
+            <i class="fas fa-search text-gray-400"></i>
+            <input
+              type="text"
+              placeholder="搜索商品"
+              class="bg-transparent border-none outline-none ml-2 w-full text-sm"
+            />
+          </div>
+        </div>
+        <i class="fas fa-bell text-gray-600"></i>
+      </div>
+      <div class="flex items-center justify-between mt-4 text-sm">
+        <a href="#" class="text-primary">推荐</a>
+        <a href="#" class="text-gray-500">女装</a>
+        <a href="#" class="text-gray-500">男装</a>
+        <a href="#" class="text-gray-500">美妆</a>
+        <a href="#" class="text-gray-500">鞋包</a>
+        <a href="#" class="text-gray-500">数码</a>
+        <a href="#" class="text-gray-500">家居</a>
+        <a href="#" class="text-gray-500">食品</a>
+      </div>
+    </nav>
+    <main class="mt-24 mb-20 px-4">
+      <div class="masonry">
+        <div class="masonry-item">
+          <img
+            src="https://ai-public.mastergo.com/ai/img_res/398e221a40f1f4c6c6f2d5bb78504dc9.jpg"
+            class="w-full rounded-lg"
+            alt="商品图片"
+          />
+          <h3 class="text-sm font-medium mt-2 line-clamp-2">
+            2024春季新款连衣裙 气质淑女风
+          </h3>
+          <p class="text-primary font-medium mt-1">¥ 299</p>
+          <div class="flex items-center text-gray-500 text-xs mt-1">
+            <span>2.3k喜欢</span>
+            <span class="mx-2">·</span>
+            <span>89条评论</span>
+          </div>
+        </div>
+        <div class="masonry-item">
+          <img
+            src="https://ai-public.mastergo.com/ai/img_res/626648a145da466296c476a2cbcba85a.jpg"
+            class="w-full rounded-lg"
+            alt="商品图片"
+          />
+          <h3 class="text-sm font-medium mt-2 line-clamp-2">
+            法国小众设计师包包 2024新款
+          </h3>
+          <p class="text-primary font-medium mt-1">¥ 1299</p>
+          <div class="flex items-center text-gray-500 text-xs mt-1">
+            <span>1.5k喜欢</span>
+            <span class="mx-2">·</span>
+            <span>156条评论</span>
+          </div>
+        </div>
+        <div class="masonry-item">
+          <img
+            src="https://ai-public.mastergo.com/ai/img_res/e53ad62b54cd4450030c54dbf088adf6.jpg"
+            class="w-full rounded-lg"
+            alt="商品图片"
+          />
+          <h3 class="text-sm font-medium mt-2 line-clamp-2">
+            限量版运动鞋 舒适透气
+          </h3>
+          <p class="text-primary font-medium mt-1">¥ 599</p>
+          <div class="flex items-center text-gray-500 text-xs mt-1">
+            <span>3.1k喜欢</span>
+            <span class="mx-2">·</span>
+            <span>267条评论</span>
+          </div>
+        </div>
+        <div class="masonry-item">
+          <img
+            src="https://ai-public.mastergo.com/ai/img_res/bd6d6a7a6977fb99b0f8222e2c350fea.jpg"
+            class="w-full rounded-lg"
+            alt="商品图片"
+          />
+          <h3 class="text-sm font-medium mt-2 line-clamp-2">
+            瑞士进口机械手表 商务精英首选
+          </h3>
+          <p class="text-primary font-medium mt-1">¥ 4999</p>
+          <div class="flex items-center text-gray-500 text-xs mt-1">
+            <span>892喜欢</span>
+            <span class="mx-2">·</span>
+            <span>45条评论</span>
+          </div>
+        </div>
+        <div class="masonry-item">
+          <img
+            src="https://ai-public.mastergo.com/ai/img_res/17645bbb8ce9e9de4bdae1364c651771.jpg"
+            class="w-full rounded-lg"
+            alt="商品图片"
+          />
+          <h3 class="text-sm font-medium mt-2 line-clamp-2">
+            法国高端护肤套装 滋润保湿
+          </h3>
+          <p class="text-primary font-medium mt-1">¥ 899</p>
+          <div class="flex items-center text-gray-500 text-xs mt-1">
+            <span>1.8k喜欢</span>
+            <span class="mx-2">·</span>
+            <span>234条评论</span>
+          </div>
+        </div>
+        <div class="masonry-item">
+          <img
+            src="https://ai-public.mastergo.com/ai/img_res/35d260801c4ea8cae8f1767ff7d51b2b.jpg"
+            class="w-full rounded-lg"
+            alt="商品图片"
+          />
+          <h3 class="text-sm font-medium mt-2 line-clamp-2">
+            925纯银项链 优雅百搭
+          </h3>
+          <p class="text-primary font-medium mt-1">¥ 399</p>
+          <div class="flex items-center text-gray-500 text-xs mt-1">
+            <span>2.5k喜欢</span>
+            <span class="mx-2">·</span>
+            <span>178条评论</span>
+          </div>
+        </div>
+      </div>
+    </main>
+    <nav class="fixed bottom-0 w-full bg-white border-t border-gray-200">
+      <div class="grid grid-cols-5 py-2">
+        <a class="flex flex-col items-center">
+          <i class="fas fa-home text-primary text-xl"></i>
+          <span class="text-primary text-xs mt-1">首页</span>
+        </a>
+        <a class="flex flex-col items-center">
+          <i class="fas fa-play text-gray-400 text-xl"></i>
+          <span class="text-gray-400 text-xs mt-1">视频</span>
+        </a>
+        <a class="flex flex-col items-center">
+          <i class="fas fa-comment text-gray-400 text-xl"></i>
+          <span class="text-gray-400 text-xs mt-1">消息</span>
+        </a>
+        <a class="flex flex-col items-center">
+          <i class="fas fa-shopping-bag text-gray-400 text-xl"></i>
+          <span class="text-gray-400 text-xs mt-1">购物</span>
+        </a>
+        <a class="flex flex-col items-center">
+          <i class="fas fa-user text-gray-400 text-xl"></i>
+          <span class="text-gray-400 text-xs mt-1">我的</span>
+        </a>
+      </div>
+    </nav>
+  </body>
+</html>

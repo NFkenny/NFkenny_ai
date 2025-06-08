@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>即时显示当前时间</title>
+    <style>
+        #timeDisplay {
+            font-size: 24px;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid red;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div id="timeDisplay"></div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            
+            // 获取日期和时间组件
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1; // 月份从0开始
+            const day = now.getDate();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+            
+            // 格式化时间为 "YYYY年MM月DD日 HH:MM:SS"
+            const formattedTime = `${year}年${month.toString().padStart(2, '0')}月${day.toString().padStart(2, '0')}日 ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // 更新显示
+            document.getElementById('timeDisplay').textContent = formattedTime;
+            
+            // 每秒更新一次
+            setTimeout(updateTime, 1000);
+        }
+
+        // 页面加载时开始更新时间
+        window.onload = updateTime;
+    </script>
+</body>
+</html>
