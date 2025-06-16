@@ -52,9 +52,9 @@ fetch(endpoint, {
     // http 是基于请求响应的简单协议
     // 返回的也是文本或二进制流
 }).then(res => res.json())
+.then(data => {
+    console.log(data);
     // 解析返回的json数据 需要花时间
-    .then(data => {
-        console.log(data);
         document.querySelector('#reply').innerHTML
          = data.choices[0].message.content;
 });

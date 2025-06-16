@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Let's travel</title>
+  <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+  <section>
+    <img src="img/bg.jpg" id="bg">
+    <img src="img/moon.png" id="moon">
+    <img src="img/mountain.png" id="mountain">
+    <img src="img/road.png" id="road">
+    <h2 id="text">Travel—World</h2>
+  </section>
+  <div class="quote-container">
+    <p class="travel-quote scroll-animate">人类先发明了旅行，又不停追问，旅行的意义。这大概便是旅行的意义。慢一点，灵魂才会跟得上。旅行的深度，决定回味的长度。踩着缓慢的步伐，不急不徐。感受大风景里的小风景。而不是用脚。觉得能活着真是太好了。爱是最美的旅行。——阿加西</p>
+    <div class="image-container">
+      <img src="img/snowMountain1.jpg" class="flex-image">
+    </div>
+    <p class="travel-quote scroll-animate">我们不是真正渴望旅行，我们不是真正渴望看山、看水、看风景，只是这灵魂，被城市束缚，捆绑，太久，我们需要找回真正的自己，这大概便是旅行的意义。</p>
+    <div class="image-container">
+      <img src="img/snowMountain3.jpg" class="flex-image">
+    </div>
+    <p class="travel-quote scroll-animate">旅行
+      离开习惯的步调，
+      认识全新的自己走这一趟更清楚。
+      世界有多大
+      人有多渺小
+      心境能有多辽阔</p>
+    <div class="image-container">
+      <img src="img/snowMountain2.jpg" class="flex-image">
+    </div>
+    <p class="travel-quote scroll-animate">
+    我去旅行，是因为我决定了要去，
+    并不是因为对风景的兴趣。</p>
+  </div>
+  <br><br><br><br><br><br><br><br><br><br>
+  <script>
+    let bg = document.getElementById('bg');
+    let moon = document.getElementById('moon');
+    let mountain = document.getElementById('mountain');
+    let road = document.getElementById('road');
+    let text = document.getElementById('text');
+    window.addEventListener('scroll', function(){
+      let value = window.scrollY;
+      bg.style.top = value * 0.5 + 'px';
+      moon.style.left = -value * 0.5 + 'px';
+      mountain.style.top = -value * 0.15 + 'px';
+      road.style.top = value * 0.15 + 'px';
+      text.style.top = value * 1 + 'px';
+    })
+  </script>
+</body>
+</html>
