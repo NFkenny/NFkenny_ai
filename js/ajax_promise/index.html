@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS 请求</title>
+  <script>
+    // document.addEventListener("DOMContentLoaded", () => {
+    //     console.log(document.getElementById("repos"));
+    // })
+  </script>
+</head>
+<body>
+  <ul id="repos">
+
+  </ul>
+  <script>
+    // 阻塞
+    // window.onload 有点晚
+    const repos = document.addEventListener("DOMContentLoaded", async () => {
+      // then 的链式调用 有点繁琐  
+      // fetch("https://api.github.com/users/shunwuyu/repos")
+      //   .then(res => res.json())
+      //   .then(data => {
+      //       console.log(data);
+      //       const repos = document.getElementById("repos");
+      //       data.forEach(repo => {
+      //           const li = document.createElement("li");
+      //           li.textContent = repo.name;
+      //           repos.appendChild(li);
+      //       })
+      //   })
+      // 同步代码
+      // es8 await async
+      // await promise 实例
+      // new Promise Promise {} fetch本质是 返回 promise 实例
+      // padding 状态 等待
+        const result = await fetch("https://api.github.com/users/shunwuyu/repos");
+        const data = await result.json();
+        // console.log(data);
+        document.getElementById("repos").innerHTML = data.map(item => `<li>${item.name}</li>`).join("");
+    })
+  </script>
+</body>
+</html>

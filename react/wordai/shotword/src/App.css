@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  /* 用渐变色来代替jpg,png 背景图片做背景，比单一色又更艺术
+  http 请求，浏览器的下载线程 
+  color stop color + 百分比
+  deg 顺时针
+  */
+  background: linear-gradient(180deg, rgba(248, 154, 234, 0.669) 0%, rgba(257,155,25,0.66) 60%);
+}

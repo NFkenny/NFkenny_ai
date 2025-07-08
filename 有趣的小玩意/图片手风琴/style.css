@@ -1,3 +1,9 @@
+@font-face {
+  font-family: '优设标题黑';
+  src: url('./font/优设标题黑.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 *{
   margin: 0;
   padding: 0;

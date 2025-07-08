@@ -107,6 +107,11 @@ section img{
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   object-fit: cover;
 }
+footer {
+  background-color: #0a2a43;
+  color: #d3d8e2;
+  text-align: center;
+}
 /* 响应式调整 */
 @media (max-width: 768px) {
   .quote-container {

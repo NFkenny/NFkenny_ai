@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS DOM2 事件机制</title>
+    <style>
+      #parent {
+        width: 200px;
+        height: 200px;
+        background-color: red;
+      }
+      #child {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="parent">
+      <div id="child"></div>
+    </div>
+    <script>
+      // js 事件不要和 DOM0 html js 耦合在一起
+      // DOM 0 和 DOM 2 混用， 不好维护
+      // addEventListener 统一用 useCapture 来控制事件的冒泡和捕获
+      document.getElementById("parent").addEventListener("click", function (e) {
+        console.log("parent");
+      });
+      document.getElementById("child").addEventListener("click", function (e) {
+        e.stopPropagation();
+        console.log("child");
+      });
+    </script>
+  </body>
+</html>
