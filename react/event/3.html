@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root">
+    <ul id="myList">
+      <li data-item="l1">Item 1</li>
+      <li data-item="l2">Item 2</li>
+      <li data-item="l3">Item 3</li>
+      <li data-item="l4">Item 4</li>
+    </ul>
+    <div id="container" data-item="d1">Wubulabodabodabo</div>
+    <button id="btn">添加节点</button>
+  </div>
+  <script>
+    // 事件委托
+    // document.getElementById('root').addEventListener('click', function(e) {
+    //   console.log(e.target.dataset.item) //唯一
+    //   // console.log(e.target.tagName.toLowerCase())
+    //   if(e.target.dataset.item === 'd1'){
+    //     console.log('container is click')
+    //   }
+    //   if(e.target.tagName.toLowerCase() === 'li') {
+    //     // console.log(e.target)
+    //     console.log('list is click')
+    //   }
+    // },false);
+    document.getElementById('myList').addEventListener('click', function(e) {
+        console.log(e.target.innerText)
+    })
+
+    document.getElementById('btn').addEventListener('click', function(e) {
+      // 动态添加节点
+      const li = document.createElement('li') // 创建元素节点
+      li.appendChild(document.createTextNode('newItem')) // 创建文本节点
+      // 添加事件
+      li.addEventListener('click', function(e) {
+        console.log('haha')
+      })
+      document.getElementById('myList').appendChild(li)
+    })
+  </script>
+</body>
+</html>

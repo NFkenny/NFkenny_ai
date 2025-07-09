@@ -1,0 +1,22 @@
+<script>
+  function debounce(fn, delay) {
+    
+    return function(args) {
+      var that = this;
+      console.log(that,'////');
+      // fn对象
+      clearTimeout(fn.id);
+      fn.id = setTimeout(() => {
+        // this 丢失问题
+        fn.call(that,args);
+      }, delay);
+    }
+  }
+  let obj = {
+    count: 0,
+    inc: debounce(function(val){
+      console.log(this.count += val);
+    },500)
+  }
+obj.inc(2)
+</script>

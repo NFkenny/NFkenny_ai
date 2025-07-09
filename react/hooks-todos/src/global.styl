@@ -10,9 +10,67 @@ body
 .app
   max-width 600px
   margin 0 auto
-  background linear-gradient(90deg, pink 50%, white 100%)
+  background linear-gradient(120deg, pink 40%, white 100%)
   padding 2rem
   border-radius 0.5rem
   box-shadow 0 2px 6px rgba(0,0,0,1)
 
+.header
+  text-align center
 
+.todo-input
+  display flex
+  gap 1rem
+  margin-bottom 1rem
+
+.todo-list
+  list-style none
+  padding 0
+  .todo-item
+    display flex
+    justify-content space-between
+    align-items center
+    padding 0.5rem
+    border-bottom 1px solid #ccc
+    .completed
+      text-decoration line-through
+      color #aaa
+
+button
+  padding 0.5rem 1rem
+  border none
+  border-radius 0.3rem
+  cursor pointer
+  background #a27aff
+  color white
+  transition background 0.3s ease
+  &:hover
+      background #8a5aff
+// li {
+//   cursor: pointer;
+//   background: white;
+//   padding: 1rem;
+//   margin: 0.5rem 0;
+//   border-radius: 8px;
+//   display: flex;
+//   align-items: center;
+//   transition: all 0.3s ease;
+//   border-left: 4px solid #a27aff;
+//   position: relative;
+// }
+// li:hover {
+//   transform: translateX(5px);
+//   box-shadow: 0 2px 4px rgba(116, 185, 255, 0.2);
+// }
+// li:hover::after {
+//   content: attr(data-status);
+//   position: absolute;
+//   right: -80px;
+//   top: 50%;
+//   transform: translateY(-50%);
+//   background: rgba(0,0,0,0.8);
+//   color: white;
+//   padding: 4px 8px;
+//   border-radius: 4px;
+//   font-size: 12px;
+// }

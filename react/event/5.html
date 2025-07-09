@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu closed</title>
+  <style>
+    #toggleBtn{
+      cursor:pointer
+    }
+    #menu{
+      display:none;
+      position:absolute;
+      top: 50px;
+      left: 50px;
+      background-color: pink;
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div id="toggleBtn">Toggle Menu</div>
+  <div id="menu">
+    <p>Menu Context</p>
+  </div>
+<script>
+  const toggleBtn = document.getElementById('toggleBtn');
+  const menu = document.getElementById('menu');
+  const closeInside = document.getElementById('closeInside');
+  // 点击菜单按钮时显示菜单
+  toggleBtn.addEventListener('click', function(e) {
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    e.stopPropagation()
+  })
+  // 阻止点击菜单时关闭菜单
+  menu.addEventListener('click', function(e) {
+    e.stopPropagation()
+  })
+  // 最外层元素添加监听器
+  document.addEventListener('click', function(e) {
+    menu.style.display = 'none'; // 点击其他地方关闭菜单
+  })
+  closeInside.addEventListener('click', function(e) {
+    e.stopPropagation()
+    alert("Menu button clicked!")
+  })
+</script>
+</body>
+</html>

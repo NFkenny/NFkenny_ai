@@ -29,6 +29,7 @@
         console.log("parent");
       });
       document.getElementById("child").addEventListener("click", function (e) {
+        // 阻止事件冒泡
         e.stopPropagation();
         console.log("child");
       });
