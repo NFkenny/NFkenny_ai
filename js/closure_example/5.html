@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="myButton">Click</button>
+  <script>
+    const obj = {
+      message: "Hello My Object",
+      sayHello: function() {
+        let that = this;
+        console.log(that.message);
+      }
+    }
+    const myButton = document.getElementById('myButton');
+    myButton.addEventListener('click', obj.sayHello.bind(obj));
+    // 或者 myButton.addEventListener('click', () => obj.sayHello());
+  </script>
+</body>
+</html>

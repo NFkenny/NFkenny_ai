@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id="inputC">
+  <script>
+    let inputC = document.getElementById('inputC');
+    const ajax = function(context){ // 被节流的函数
+      // fetch
+      // XMLHttpRequest
+      console.log('ajax request' + context )
+    }
+
+    let throttleAjax = throttle(ajax, 1000);
+
+    function throttle(fn, delay) {
+      let last = null;
+      let deferTimer;
+      return function(...args) {
+        let that = this;
+        let now = + new Date();
+        // let args = arguments; 可行
+        if(last && now - last < delay) {
+          clearTimeout(deferTimer);
+          deferTimer = setTimeout(() => {
+            last = now;
+            fn.apply(that,args);
+          }, delay);
+        }
+        else {
+          last = now;
+          fn.apply(that,args);
+        }
+      }
+    }
+    inputC.addEventListener('input', function(e) {
+      throttleAjax(e.target.value)
+    })
+  </script>
+</body>
+</html>

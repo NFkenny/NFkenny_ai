@@ -28,6 +28,7 @@ const server = http.createServer((req, res) => {
   if (req.method === "GET" && (req.url === "/" || req.url === "/index.html")) {
     // 首页
     fs.readFile(
+      // 拼接路径
       path.join(__dirname, "public", "index.html"),
       // 异步 callback
       (err, content) => {

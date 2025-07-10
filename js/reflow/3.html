@@ -1,26 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BFC</title>
+  <title>BFC 探秘</title>
   <style>
     .container{
-      background-color: aqua;
-      /* width: 500px; */
+      background-color: aqua; /* 一个浅蓝色的父容器 */
       overflow: hidden;
+      /* border: 1px solid black; 为了看得更清楚，加个边框 */
     }
+
     .box{
       margin: 100px;
       width: 100px;
       height: 100px;
-      background-color: red;
-      float: left;
-
-      /* position: absolute;
-      top: 0;
-      left: 0; */
+      background-color: red; /* 三个红色的小方块 */
+      float: left; /* 关键在这里，我们让它们浮动了 */
     }
+
+
   </style>
 </head>
 <body>
@@ -28,7 +25,6 @@
     <div class="box"></div>
     <div class="box"></div>
     <div class="box"></div>
-    <!-- <div></div> -->
   </div>
 </body>
 </html>
