@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    console.log('同步start');
+    queueMicrotask(()=>{
+      // DOM 更新了，但不是渲染完了
+      // 一个元素的属性 
+      console.log('微任务: queueMicrotask');
+    })
+    console.log('同步end');
+    
+  </script>
+</body>
+</html>
