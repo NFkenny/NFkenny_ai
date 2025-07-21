@@ -1,0 +1,17 @@
+// 鉴权组件
+import { Navigate,useLocation } from 'react-router-dom'
+const ProtectRoute = (props)=>{
+  console.log(props);
+  // 并非子组件
+  // children 属性 提升定制性
+  const {children} = props
+  const {pathname} = useLocation()
+  const isLogin = localStorage.getItem('isLogin') === 'true'
+  console.log(pathname);
+  
+  if(!isLogin){
+    return <Navigate to='/login' state={{from:pathname}} />
+  }
+  return (children) 
+}
+export default ProtectRoute

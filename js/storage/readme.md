@@ -1,4 +1,4 @@
-# Stotage 存储
+# Storage 存储
   - 前端存储
     - cookie 
     存储什么？

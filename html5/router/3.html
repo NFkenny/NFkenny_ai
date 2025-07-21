@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPA</title>
+</head>
+<body>
+  <a name="top"></a>
+  <h1>Navigation</h1>
+  <ul>
+    <li><a href="#home">首页</a></li>
+    <li><a href="#about">关于我们</a></li>
+    <li><a href="#contact">联系我们</a></li>
+  </ul>
+  <div id="content-container" class="content">
+    Welcome, click on the links above to navigate through the pages.
+  </div>
+  <div class="box" style="width: 100vh; height: 100vh;"></div>
+  <a href="#top">回到顶部</a>
+  <script>
+    const content = document.getElementById("content-container");
+    window.addEventListener("hashchange", () => {
+      console.log(window.location.hash);
+      switch(window.location.hash) {
+        case "#home":
+          content.innerHTML = "home";
+          break;
+        case "#about":
+          content.innerHTML = "about";
+          break;
+        case "#contact":
+          content.innerHTML = "contact";
+          break;
+        default:
+          content.innerHTML = "default";
+          break;
+      }
+    })
+
+  </script>
+</body>
+</html>
