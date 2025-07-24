@@ -95,4 +95,26 @@ README.md 很重要 它可以方便面试官了解你的项目
   - 频繁的单位 260/75 换算
   - 自动化？
       postcss + postcss-pxtorem 自动将px转换为rem
+      postcss 是 css 与编译器，很强大
+      vite 自动读取postcss.config.js 将css 内容编译
+      px -> rem
 # git 提交规范
+- 项目初始化
+## 功能模块
+- UI 组件库
+  - react-vant 第三方组件库 70%的组件已经有了，不用写
+  - 选择一个适合业务的UI组件库 或者公司内部的组件库
+- 配置路由及懒加载
+  - 懒加载
+  - 路由守卫
+  - Layout组件
+    - 嵌套路由Outlet 分组路由配置
+    - 网页有几个模板 Layout
+      - tabbar 模板
+      - blank 模板
+  - tabbar
+    - react-vant + @react-vant/icons
+    - value + onChange 响应式
+    - 直接点击链接分享 active 的
+- 自定义Hooks
+  - useTitle 一定要设置
