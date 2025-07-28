@@ -37,8 +37,8 @@ const payload = {
     messages: [
         //chat 三种方式
         // 1.系统角色 只会出现一次 设置系统的角色 开始会话时
-        // 2.用户角色
-        // 3.助手角色
+        // 2.用户角色  会出现多次  普通的用户问题
+        // 3.助手角色 会出现多次  助手的回答
         { role: 'system', content: 'You are a helpful assistant.' },
         { role: 'user', content: '你好 DeepSeek' }
     ],
