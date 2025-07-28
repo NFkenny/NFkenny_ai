@@ -8,7 +8,7 @@ import './App.css'
 import MainLayout from '@/components/MainLayout'
 import BlankLayout from '@/components/BlankLayout'
 
-
+// 懒加载页面组件
 const Home = lazy(() => import('@/pages/Home'))
 const Search = lazy(() => import('@/pages/Search'))
 const Collection = lazy(() => import('@/pages/Collection'))
@@ -27,8 +27,8 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path='/' element={<Navigate to='/home' />} />
             <Route path='/home' element={<Home />} />
-            <Route path='/collection' element={<Collection />} />
             <Route path='/discount' element={<Discount />} />
+            <Route path='/collection' element={<Collection />} />
             <Route path='/trip' element={<Trip />} />
             <Route path='/account' element={<Account />} />
           </Route>
