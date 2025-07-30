@@ -119,6 +119,11 @@ README.md 很重要 它可以方便面试官了解你的项目
 - chatbot 模块
   - llm 模块 chat 封装
   - 迭代chat , 支持任意模型
+- Search
+  - 防抖
+  - api
+      GoogleSuggest
+  - localStorage
 
 ## 项目亮点和难点
 - 前端智能
@@ -137,6 +142,14 @@ README.md 很重要 它可以方便面试官了解你的项目
       一个元素按功能逻辑拆分成多个类，和原子一样
       元素的样式就可以由这些原子类组合而成
       样式复用的更好, 以后几乎可以不用写样式
+- 用户体验优化
+  - 搜索建议，防抖+useMemo 性能优化
+  - 组件粒度划分
+      React.memo + useCallback
+  - 懒加载
+  - 热门推荐 + 相关商品 (产品) 
+  - SPA 
+  - 骨架屏 不用让用户等待了 (Skeleton) 
 ## 项目遇到过什么问题
 - chat message 遇到message 覆盖问题
 - 闭包陷阱问题
@@ -157,3 +170,10 @@ README.md 很重要 它可以方便面试官了解你的项目
   - deepseek-r1 推理模型
   - 流式输出
   - coze 工作流接口调用
+
+## 通用组件开发
+- Loading 
+  - 居中方案
+      position:fixed + tlrb0 + margin auto
+  - React.memo 无状态组件，不重新渲染
+  - animation

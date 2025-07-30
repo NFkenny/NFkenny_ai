@@ -1,0 +1,14 @@
+# Typescript + React
+大型项目标配
+
+- typescript?
+    微软发明的语言
+    JavaScript的超集
+    可以按JS 来写
+
+- js 开发容易出现的问题 
+    - 类型 随意
+    - ts 添加了类型的约定
+
+- react 什么是组件？
+    函数 返回 JSX

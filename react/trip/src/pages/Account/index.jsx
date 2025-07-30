@@ -14,20 +14,40 @@ import {
   StarO,
   SettingO,
   UserCircleO,
+  AddO,
+  CartO,
+  ChatO,
+  FireO,
+  LikeO,
+  Search,
+  HomeO,
+  UserO,
 } from "@react-vant/icons";
 import { generateAvatar } from "@/llm";
 import styles from "./account.module.css";
 
 const Account = () => {
   useTitle("我的");
+  const gridData = [
+    { icon: <AddO />, text: '添加' },
+    { icon: <CartO />, text: '购物车' },
+    { icon: <ChatO />, text: '聊天' },
+    { icon: <FireO />, text: '热门' },
+    { icon: <LikeO />, text: '喜欢' },
+    { icon: <StarO />, text: '收藏' },
+    { icon: <Search />, text: '搜索' },
+    { icon: <HomeO />, text: '首页' },
+    { icon: <UserO />, text: '我的' }
+  ];
   const [userInfo, setUserInfo] = useState({
     nickname: "南方Kenny",
     level: "4级",
     slogan: "生活因你而火热",
     avatar: "@/../public/NFkenny.jpeg",
   });
+
   const [showActionSheet, setShowActionSheet] = useState(false);
-  //
+
   const handleAction = async (e) => {
     console.log(e);
     if (e.type === 1) {
@@ -94,6 +114,17 @@ const Account = () => {
         onSelect={(e) => handleAction(e)}
       >
       </ActionSheet>
+      <br />
+      <div className={styles.gridContainer}>
+        {
+          gridData.map((item,index)=>(
+            <div key={index} className={styles.gridItem}>
+              <div className={styles.icon}>{item.icon}</div>
+              <div className={styles.text}>{item.text}</div>
+            </div>
+          ))
+        }
+      </div>
     </div>
   );
 };
