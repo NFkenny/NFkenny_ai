@@ -124,7 +124,30 @@ README.md 很重要 它可以方便面试官了解你的项目
   - api
       GoogleSuggest
   - localStorage
-
+- 瀑布流
+  - 小红书等主流App的内容浏览用户体验产品
+      两列、图片高度不一样、落差感
+      滚动加载更多，图片懒加载
+  - 接口
+      /api/images?page=${n} 支持翻页
+      唯一id page + index
+      随机图片， 高度随机
+  - images 怎么放到两列中？ MVVM
+  数据驱动界面 (2列) 奇偶分配
+  - 加载更多 位于盒子底部的元素 通过使用 IntersectionObserver 
+  观察它是否出现在视窗，性能更好，使用了观察者模式
+  组件卸载时，直接使用disconnect 释放资源，防止内存泄漏
+  - key id 下拉刷新
+  - 使用IntersectionObserver 再次图片懒加载 data-src
+- toast 组件封装
+  - 需要自定义，UI组件库不满足需求
+  - UI props
+  - JS 显示出来 跨层级通信
+      观察者
+  - mitt eventBus 事件总线
+    - 实例化 mitt()
+    - on (自定义事件的名字，参数)
+    组件通过监听一个自定义事件，实现基于事件的组件通信
 ## 项目亮点和难点
 - 前端智能
   - chat 函数
@@ -142,6 +165,32 @@ README.md 很重要 它可以方便面试官了解你的项目
       一个元素按功能逻辑拆分成多个类，和原子一样
       元素的样式就可以由这些原子类组合而成
       样式复用的更好, 以后几乎可以不用写样式
+- 智能生成图片
+  - 产品
+      冰球社群的宠物运动员 智能出图
+      社交属性
+  - 商业价值
+      技术服务
+      coze 工作流 智能编排AI 流程 编程的一种
+  - api调用
+
+  - 设计工作流
+    - 创建工作流 ani_pic
+        上传宠物图片，生成宠物曲棍球运动员图片
+    - 代码节点
+        参数校验和逻辑功能，返回运行的结果
+    - 图片生成流程
+      - 图片理解插件 计算机视觉
+      - 大模型 特征提取
+      - prompt
+  - workflow_id 7533135183668314155 
+  - token pat_4OiZraaJSCNAtf0CGeIMsmFq8kt7ZQZ7W5VS4wIWAk93tmDLI0SV13slq9W4Dr9X
+  - coze 图片要先上传到coze中
+      append(file)
+      拿到file_id
+  - workflowUrl + workflow_id + token
+      工作流需要的参数
+
 - 用户体验优化
   - 搜索建议，防抖+useMemo 性能优化
   - 组件粒度划分
@@ -154,7 +203,10 @@ README.md 很重要 它可以方便面试官了解你的项目
 - chat message 遇到message 覆盖问题
 - 闭包陷阱问题
     一次事件里面，两次setMessage()
-
+- 升级瀑布流？
+    - 骨架屏
+    - 奇偶images 两列分配可能有时候会分配不均匀，导致一边会很凸出，不好看 
+        两个响应式数据，判断那一列高度更少，将新得到的img加入那个数组
 - 自定义Hooks
   - useTitle 
   一定要设置
@@ -163,6 +215,12 @@ README.md 很重要 它可以方便面试官了解你的项目
   - arr.findIndex
   - str.startsWith
   - promise
+  瀑布流随机数据生成
+  - Array.from({length:pageSize}, (_,i) =>({
+    id: `${page}-${i}`,
+    height: Mock.Random.integer(400,600),
+    url: Mock.Random.image('300x400', Mock.Random.color(), '#fff', 'img'),
+  }))
 
 - 项目迭代
   - 功能由浅入深
