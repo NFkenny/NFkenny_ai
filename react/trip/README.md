@@ -199,6 +199,16 @@ README.md 很重要 它可以方便面试官了解你的项目
   - 热门推荐 + 相关商品 (产品) 
   - SPA 
   - 骨架屏 不用让用户等待了 (Skeleton) 
+  - 文件上传的preview html5 FileReader
+- 语音输入发表文章
+    - 字节的tts
+    - onMouseDown 开始录音
+    - onMouseUp 结束录音
+    - BOW html5
+    navigator.mediaDevices.getUserMedia({
+      audio: true
+    })
+    用户隐私，要授权  
 ## 项目遇到过什么问题
 - chat message 遇到message 覆盖问题
 - 闭包陷阱问题
@@ -235,3 +245,5 @@ README.md 很重要 它可以方便面试官了解你的项目
       position:fixed + tlrb0 + margin auto
   - React.memo 无状态组件，不重新渲染
   - animation
+- AI 功能
+    智能前端 (http请求) + 工作流 + coze api + ai 全新工作链路 + 自动化Agent

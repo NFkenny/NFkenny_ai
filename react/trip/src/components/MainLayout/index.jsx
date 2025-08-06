@@ -59,9 +59,9 @@ const MainLayout = () => {
   return (
     <div 
       className='flex flex-col h-screen'
-      style={{paddingBottom:'50px'}}
+      style={{position:'relative',overflow:'hidden'}}
     >
-      <div className='flex-1'>
+      <div className='flex-1' style={{paddingBottom: '75px',overflowY: 'auto'}}>
         <Outlet />
       </div>
       {/* tabbar */}

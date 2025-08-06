@@ -1,6 +1,7 @@
 .container{
   background-color: #f5f5f5;
   height: 100%;
+  padding-bottom: 20px;
 }
 .user{
   background-color: #fff;
@@ -29,6 +30,8 @@
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 16px;
   padding: 16px;
+  grid-auto-rows: minmax(120px, auto); /* 确保每行至少120px高，可根据内容自动扩展 */
+  padding-bottom: 75px; /* 增加底部边距，防止被Tabbar遮挡 */
 }
 /* .gridItem {
   background-color: #fff;
@@ -50,10 +53,15 @@
     cursor:pointer;
 }
 .gridItem .icon {
-    font-size: 48px;
+    font-size: 36px;
     margin-bottom: 16px;
 }
 .gridItem .text {
     font-size: 28px;
     color: #333;
+}
+@media (max-width: 375px) {
+  .gridContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

@@ -19,9 +19,10 @@ const Account = lazy(() => import('@/pages/Account'))
 const Coze = lazy(() => import('./pages/Coze/index.jsx'));
 const Detail = lazy(() => import('@/pages/Detail'))
 const Search = lazy(() => import('@/pages/Search'))
+const Article = lazy(() => import('@/pages/Article'))
+const ArticleNew = lazy(() => import('@/pages/Article/ArticleNew'))
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -39,6 +40,8 @@ function App() {
           <Route element={<BlankLayout />}>
             <Route path="/coze" element={<Coze />}/>
             <Route path='/search' element={<Search />} />
+            <Route path='/article' element={<Article />} />
+              <Route path='/article/:id' element={<ArticleNew />} />
             <Route path='/detail/:id' element={<Detail />} />
           </Route>
         </Routes>
