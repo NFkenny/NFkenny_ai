@@ -8,6 +8,7 @@
 <body>
   <div id="container">1</div>
   <button id="btn">点击加1</button>
+  <button id="btnLogin">登录</button>
   <script>
     // js dom api
     // 不利于业务，性能不好
@@ -26,7 +27,8 @@
       value: 1, // 数据 响应式？状态呢？
       isLogin: false,
     }
-    var value = 1;
+    let value = 1;
+    let isLogin = false;
     Object.defineProperty(obj, 'value', {
       // 定义obj 上的value 属性，有什么样的操作
       get: function(){
@@ -37,6 +39,16 @@
       set: function(newValue){
         value = newValue;
         document.getElementById('container').innerHTML = newValue;
+      }
+    })
+    // 一次智能定义一个property
+    Object.defineProperty(obj, 'isLogin', {
+      get: function() {
+        console.log('读取isLogin属性', isLogin);
+        return isLogin;
+      },
+      set: function() {
+        
       }
     })
     document.getElementById('btn').addEventListener('click', function(){
