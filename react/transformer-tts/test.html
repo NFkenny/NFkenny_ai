@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn">按钮</button>
+  <button id="btnB">按钮B</button>
+
+  <script>
+    const btn = document.getElementById('btn')
+    const rmBtn = document.getElementById('btnB')
+
+    rmBtn.addEventListener('click', function(){
+      btn.removeEventListener('click', callbackB)
+    })
+    // 订阅发布者模式
+    const callbackA = function(){
+      console.log('callbackA 被调用了');
+    }
+    const callbackB = function(){
+      console.log('callbackB 被调用了');
+    }
+    btn.addEventListener('click', callbackA)
+    btn.addEventListener('click', callbackB)
+
+  </script>
+
+</body>
+</html>
