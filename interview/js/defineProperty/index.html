@@ -47,12 +47,16 @@
         console.log('读取isLogin属性', isLogin);
         return isLogin;
       },
-      set: function() {
-        
+      set: function(newValue) {
+        isLogin = newValue;
+        document.getElementById('btnLogin').innerHTML = isLogin ? '退出' : '登录';
       }
     })
     document.getElementById('btn').addEventListener('click', function(){
       obj.value += 1;
+    })
+    document.getElementById('btnLogin').addEventListener('click', function(){
+      obj.isLogin = !obj.isLogin;
     })
 
   </script>
