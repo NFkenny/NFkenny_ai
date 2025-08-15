@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 
 // 安全性 编码的时候加密
-// 解码的时候用于解密
+// 解码的时候用于解密，密钥：用于JWT的签名和验证
 // secret 加盐
 const secret = '!@248codejwt'
 
