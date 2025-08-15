@@ -13,12 +13,19 @@
 
 ## Git 
 开发中的如何使用git的
+
+- 安装开发环境
+  - node
+  - git 环境 开源的分布式版本管理软件
+  - 公司会发放一个git 账号，私有项目
+
 - git config --global user.name "yourname"
   git config --global user.email "youremail"
 - 入职 git clone 公司代码
   - 主分支 main/master
       所有人都在用的，线上分支
-  - 新开发一个分支
+  - 新开一个分支
+      在自己的工作任务分支
     git checkout -b xxx 新分支名
 - 常用命令
     git pull origin main 每天上班前的动作
