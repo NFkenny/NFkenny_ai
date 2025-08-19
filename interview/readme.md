@@ -35,4 +35,7 @@
     git commit -m "提交信息到xxx分支"
     git push origin xxx  把本地分支xxx 推送到远程分支xxx
 
+- 场景
+  - 回退
+  git restore --staged algorithm/readme.md
 

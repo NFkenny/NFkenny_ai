@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lottie动画示例</title>
+  <!-- 引入Lottie库 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+  <style>
+    /* 动画容器样式 */
+    #lottie-container {
+      width: 300px;
+      height: 300px;
+      margin: 50px auto;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    /* 控制按钮样式 */
+    .controls {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 8px 16px;
+      margin: 0 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="text-align: center;">Lottie动画演示</h1>
+  <!-- 动画容器 -->
+  <div id="lottie-container"></div>
+
+  <!-- 控制按钮 -->
+  <div class="controls">
+    <button id="play-btn">播放</button>
+    <button id="pause-btn">暂停</button>
+    <button id="stop-btn">停止</button>
+    <button id="speed-up-btn">加速</button>
+    <button id="speed-down-btn">减速</button>
+  </div>
+
+  <script>
+    // 初始化动画
+    const animation = lottie.loadAnimation({
+      container: document.getElementById('lottie-container'), // 动画容器
+      renderer: 'svg',          // 渲染方式: 'svg', 'canvas', 'html'
+      loop: true,               // 是否循环播放
+      autoplay: true,           // 是否自动播放
+      // 使用在线的Lottie动画JSON文件
+      path: 'https://assets5.lottiefiles.com/packages/lf20_9Y7cXz.json'
+    });
+
+    // 控制按钮事件
+    document.getElementById('play-btn').addEventListener('click', () => {
+      animation.play();
+    });
+
+    document.getElementById('pause-btn').addEventListener('click', () => {
+      animation.pause();
+    });
+
+    document.getElementById('stop-btn').addEventListener('click', () => {
+      animation.stop();
+    });
+
+    document.getElementById('speed-up-btn').addEventListener('click', () => {
+      const currentSpeed = animation.getSpeed();
+      animation.setSpeed(currentSpeed + 0.5);
+    });
+
+    document.getElementById('speed-down-btn').addEventListener('click', () => {
+      const currentSpeed = animation.getSpeed();
+      if (currentSpeed > 0.5) {
+        animation.setSpeed(currentSpeed - 0.5);
+      }
+    });
+
+    // 动画事件监听
+    animation.addEventListener('data_ready', () => {
+      console.log('动画数据已加载完成');
+    });
+
+    animation.addEventListener('complete', () => {
+      console.log('动画播放完成一次');
+    });
+  </script>
+</body>
+</html>

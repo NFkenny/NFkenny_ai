@@ -87,7 +87,7 @@ const Coze = () => {
     const data = JSON.parse(ret.data);
     setStatus("");
     console.log(data);
-    setImgUrl(data.data);
+    setImgUrl(data.data[0].url);
     console.log(imgUrl);
   };
 
@@ -134,10 +134,9 @@ const Coze = () => {
           </select>
         </div>
 
-        <div className="settings">
-          <div className="selection">
+        <div className={styles.settings}>
+          <div className={styles.selection}>
             <label>位置：</label>
-
             <select
               value={position}
               onChange={(e) => {

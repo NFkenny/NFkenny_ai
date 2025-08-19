@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RequestAnimationFrame</title>
+  <style>
+    .progress-bar {
+      width: 0;
+      height: 20px;
+      background-color: rgb(0, 234, 255);
+    }
+
+  </style>
+</head>
+<body>
+  <h1>RequestAnimationFrame</h1>
+  <p>
+    更重要的更优先的：用户交互
+    用于动画、游戏等场景，浏览器会在下次重绘之前调用回调函数。
+    不是一直执行的,1s 执行 60次
+    16.67ms
+  </p>
+  <div id="bar" class="progress-bar"></div>
+  <button id="start">开始</button>
+  <button id="stop">停止</button>
+  <script>
+    const btn = document.getElementById('start')
+    const div = document.getElementById('bar')
+    let start =  0;
+    let allInterval = [];
+    const progress = () => {
+      // 触发回流 布局相关
+      bar.style.width = bar.offsetWidth + 1 + 'px';
+      let current = Date.now();
+      if (current - start < 2400) {
+        requestAnimationFrame(progress);
+      }
+    }
+    btn.addEventListener('click', () => {
+      bar.style.width = 0;
+      let current = Date.now();
+      start = current;
+      requestAnimationFrame(progress);
+      console.log(allInterval);
+    })
+  </script>
+</body>
+</html>
