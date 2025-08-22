@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>让红绿灯停下来</title>
+</head>
+<body>
+  <button id="start">开始</button>
+  <button id="pause">暂停</button>
+  <div id="status"></div>
+  <script>
+    const statusBox = document.getElementById('status');
+    // 定义带中止功能的sleep函数
+    // ms: 睡眠毫秒数
+    // signal: AbortController的signal对象，用于监听中止信号
+    const sleep = (ms, signal) => new Promise((resolve, reject) => {
+      // 设置定时器
+      const timer = setTimeout(resolve, ms);
+      // 监听中止信号
+      signal.addEventListener('abort', () => {
+        clearTimeout(timer)
+        // 抛出中止错误
+        reject(new DOMException("Aborted","AbortError"));
+      },{ once: true}); // {once: true} 确保监听器只执行一次
+      // eventEmitter 订阅发布者模式
+    })
+    const seq = [
+      {color: 'red', ms: 3000},
+      {color: 'yellow', ms: 1000},
+      {color: 'green', ms: 2000},
+    ]
+    // 声明AbortController变量
+    let controller = null;
+
+    // 交通信号灯主函数
+    // signal: 用于接收中止信号
+    async function trafficLight(signal) {
+      // 循环执行，直到接收到中止信号
+      while(!signal.aborted){
+        // 遍历信号灯序列（假设seq是已定义的包含color和ms的数组）
+        for(const {color, ms} of seq) {
+          // 检查是否已中止
+          if(signal.aborted) return;
+          console.log(color);
+          statusBox.textContent = color;
+          try {
+            await sleep(ms, signal);
+          } catch(err) {
+            if (err.name === 'AbortError') return;
+            throw err;
+          }
+        }
+      }
+    }
+    document.getElementById('start').addEventListener('click', () => {
+      // 防止重复启动
+      if(controller && !controller.signal.aborted) return;
+      // 创建新的AbortController实例
+      controller = new AbortController();
+      // 启动交通信号灯
+      trafficLight(controller.signal);
+    })
+    document.getElementById('pause').addEventListener('click', ()=> {
+      // 如果存在控制器，则中止操作
+      if(controller) controller.abort();
+    })
+  </script>
+</body>
+</html>
