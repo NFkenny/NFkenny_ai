@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /* 填写样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .virtual-list-container {
+            width: 400px;
+            height: 100vh;
+            overflow: auto;
+            border: 1px solid #ccc;
+        }
+        .virtual-list-item {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>    
+    <div class="container">
+        <h1>虚拟列表示例</h1>
+        
+        <div id="virtualListContainer" class="virtual-list-container">
+            <div id="virtualListContent" class="virtual-list-content">
+                
+            </div>
+        </div>
+    </div>
+    <!-- 填写标签 -->
+    <script type="text/javascript">
+        // 虚拟列表类
+        class VirtualList {
+            // TODO:
+            constructor(container, options = {}) {
+              this.container = container;
+              this.options = options;
+              this.data = options.data || [];
+              this.itemHeight = options.itemHeight || 50;
+              this.totalHeight = this.data.length * this.itemHeight;
+            }
+
+            render() {
+                const content = this.container.querySelector('.virtual-list-content');
+                content.style.height = `${this.totalHeight}px`;
+                this.data.forEach((item, index) => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'virtual-list-item';
+                    itemElement.style.height = `${this.itemHeight}px`;
+                    itemElement.textContent = `${item.name}: ${item.description}`;
+                    content.appendChild(itemElement);
+                });
+            }
+        }
+        
+        let globalData = [];
+        // 生成测试数据
+        function generateData(count) {
+            const items = [];
+            for (let i = 0; i < count; i++) {
+                const descriptionLength = Math.floor(Math.random() * 200) + 50;
+                const description = `这是第 ${i} 项的描述，包含一些随机长度的文本内容。`.repeat(Math.ceil(descriptionLength / 50));
+                
+                items.push({
+                    id: i,
+                    name: `项目 ${i}`,
+                    description: description.substring(0, descriptionLength)
+                });
+            }
+            return items;
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('virtualListContainer');
+            const data = generateData(10000);
+            const virtualList = new VirtualList(container,{
+                data: data,
+                itemHeight: 50
+            });
+            virtualList.render();
+            globalData = data;
+            console.log(container);
+            const content = container.querySelector('.virtual-list-content');
+            const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  console.log('元素进入视口');
+                  const scrollTop = content.scrollTop;
+                  const visibleStart = Math.floor(scrollTop / this.itemHeight);
+                  const visibleEnd = Math.ceil((scrollTop + content.clientHeight) / this.itemHeight);
+                  console.log(visibleStart, visibleEnd);
+                  // 渲染可见区域的项目
+                  const visibleItems = globalData.slice(visibleStart, visibleEnd);
+                  visibleItems.forEach(item => {
+                      const itemElement = document.createElement('div');
+                      itemElement.className = 'virtual-list-item';
+                      itemElement.style.height = `${this.itemHeight}px`;
+                      itemElement.textContent = `${item.name}: ${item.description}`;
+                      content.appendChild(itemElement);
+                  })
+                }
+            });
+        })
+        // 监听滚动事件
+        content.addEventListener('scroll', () => {
+            const scrollTop = content.scrollTop;
+            const visibleStart = Math.floor(scrollTop / this.itemHeight);
+            const visibleEnd = Math.ceil((scrollTop + this.container.clientHeight) / this.itemHeight);
+            console.log(visibleStart, visibleEnd);
+            // 渲染可见区域的项目
+            const visibleItems = this.data.slice(visibleStart, visibleEnd);
+            this.renderItems(visibleItems);
+            }); 
+            // 监听滚动事件
+            content.addEventListener('scroll', () => {
+                const scrollTop = content.scrollTop;
+                const visibleStart = Math.floor(scrollTop / this.itemHeight);
+                const visibleEnd = Math.ceil((scrollTop + this.container.clientHeight) / this.itemHeight);
+                console.log(visibleStart, visibleEnd);
+                // 渲染可见区域的项目
+                const visibleItems = this.data.slice(visibleStart, visibleEnd);
+                this.renderItems(visibleItems);
+            });
+            observer.observe(content);
+        }); 
+    </script>
+</body>
+
+</html>
