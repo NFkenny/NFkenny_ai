@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Performance API Example</title>
+  <style>
+    #myList {
+      margin: 20px;
+      padding: 0;
+      list-style-type: none;
+    }
+  </style>
+</head>
+<body>
+  <ul id="myList">
+    <li>Item1</li>
+    <li>Item2</li>
+    <li>Item3</li>
+  </ul>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // performance api 创建名为'start'的性能标记点，记录开始时间
+      performance.mark('start');
+      // 获取第一个元素
+      const firstLi = document.querySelector('#myList li');
+      // 如果找到了li元素，创建另一个性能标记点
+      if(firstLi) {
+        performance.mark('firstLiRendered');
+      }
+      // 创建结束标记点
+      performance.mark('end')
+      
+      // 测量从'start'到'firstLiRendered'两个标记点之间的时间差
+      // 并将这次测量命名为'First LI Render Time'
+      performance.measure('First LI Render Time', 'start', 'firstLiRendered');
+      // 获取所有名为'First LI Render Time'的测量结果
+      const measures = performance.getEntriesByName("First LI Render Time");
+      // 如果有测量结果，则在控制台输出渲染时间
+      if (measures.length > 0) {
+        console.log('第一个Li 渲染时间', measures[0].duration, '毫秒');
+      }
+      performance.clearMarks();
+      performance.clearMeasures();
+
+    })
+  </script>
+</body>
+</html>

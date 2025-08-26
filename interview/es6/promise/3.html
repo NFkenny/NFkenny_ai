@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const p1 = Promise.resolve("p1");
+      const p2 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // console.log("p2 执行完成 1s");
+          resolve("p2 延时 1s");
+        }, 1000);
+      });
+      const p3 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // console.log("p3 执行完成 3s");
+          resolve("p3 延时 3s");
+        }, 3000);
+      });
+      const p4 = Promise.reject("p4失败");
+      const p5 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          reject("p5 rejected 延时 2s");
+        }, 2000);
+      });
+      // Promise.race([p1,p4,p2,p3])
+      //   .then(res => console.log(res))
+      //   .catch(err => console.log(err))  打印 p1
+
+      // Promise.race([p4,p1,p2,p3])
+      //   .then(res => console.log(res))
+      //   .catch(err => console.log(err))  打印 p4失败
+
+      // Promise.race([p5,p2,p3])
+      //   .then(res => console.log(res))
+      //   .catch(err => console.log(err))  打印 p2
+
+      // Promise.any([p4,p2,p3,p1])
+      //   .then(res => console.log(res))
+      //   .catch(err => console.log(err))
+      
+      // Promise.allSettled([p1, p2, p3, p4, p5])
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+    </script>
+  </body>
+</html>

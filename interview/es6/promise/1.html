@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const p1 = Promise.resolve("p1");
+      const p2 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log("p2 执行完成 1s");
+          resolve("p2 延时 1s");
+        }, 1000);
+      });
+      const p3 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log("p3 执行完成 5s");
+          resolve("p3 延时 5s");
+        }, 5000);
+      });
+      const p4 = Promise.reject("p4 rejected");
+      const p5 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          reject("p5 rejected 延时 3s");
+        }, 3000);
+      });
+      // 并行
+      console.time();
+      
+      Promise.all([p1, p2, p3])
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      // Promise.all([p1, p2, p3, p5])
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      Promise.all([p1, p4, p5])
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    </script>
+  </body>
+</html>
