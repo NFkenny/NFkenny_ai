@@ -1,0 +1,9 @@
+{
+  "name": "ai-vlm-demo",
+  "version": "1.0.0",
+  "description": "浏览器中的视觉语言模型(VLM)演示",
+  "type": "module",
+  "scripts": {
+    "dev": "echo '请使用浏览器直接打开demo.html文件'"
+  }
+}

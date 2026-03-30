@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Qwen POC - 文件打标签</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 20px;
+      }
+      input[type="file"] {
+        margin: 15px 0;
+      }
+      button {
+        background: #1890ff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      #result {
+        margin-top: 20px;
+        padding: 15px;
+        background: #f0f7ff;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>✨ Qwen文件标签打标器</h1>
+    <p>支持：图片、音频、视频、文本（上传试试看！）</p>
+
+    <input
+      type="file"
+      id="fileInput"
+      accept="image/*,audio/*,video/*,text/plain"
+    />
+    <button onclick="uploadFile()">开始打标</button>
+
+    <div id="result"></div>
+
+    <script>
+      async function uploadFile() {
+        const file = document.getElementById("fileInput").files[0];
+        if (!file) return alert("请先选个文件！");
+
+        document.getElementById("result").innerText = "正在分析...";
+
+        try {
+          const formData = new FormData();
+          formData.append("file", file);
+          console.log("FormData内容:");
+          for (let pair of formData.entries()) {
+            console.log(
+              pair[0] + ": " + pair[1].name + " (" + pair[1].size + " bytes)"
+            );
+          }
+
+          console.log("FormData大小:", formData.getAll("file").length);
+
+          // 2. 发送到后端（关键！不能直接调用API）
+          const response = await fetch("/api/analyze", {
+            method: "POST",
+            body: formData,
+          });
+          console.log("response:", response);
+          const data = await response.json();
+
+          console.log("后端响应:", data);
+
+          // 检查响应是否包含错误信息
+          if (data.error) {
+            document.getElementById("result").innerHTML = `
+                        <strong>处理失败：</strong><br>
+                        ${data.error}
+                        ${
+                          data.details
+                            ? `<br>详细信息：${JSON.stringify(data.details)}`
+                            : ""
+                        }
+                    `;
+          } else {
+            // 安全访问tags数组
+            document.getElementById("result").innerHTML = `
+                        <strong>标签结果：</strong><br>
+                        ${
+                          Array.isArray(data.tags)
+                            ? data.tags.join(", ")
+                            : "未识别到标签"
+                        }
+                    `;
+          }
+        } catch (error) {
+          document.getElementById("result").innerHTML = `
+                    <strong>处理失败：</strong><br>
+                    ${error.message}
+                `;
+        }
+      }
+    </script>
+  </body>
+</html>
